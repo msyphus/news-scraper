@@ -17,7 +17,7 @@ mongoose.connect(MONGODB_URI)
 app.get("/scrape", function(req, res) {
     axios.get("https://www.undercurrentnews.com/upstream/aquaculture/").then(function(response) {
         const $ = cheerio.load(response.data);
-        $("article a").each(function(i, element) {
+        $("article").each(function(i, element) {
             let result = {};
             result.title = $(element).find("a").attr("title");
             result.link = $(element).find("a").attr("href");
