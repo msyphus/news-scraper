@@ -7,9 +7,9 @@ $.getJSON("/articles", function(data) {
 });
 
 $(document).on("click", "p", function() { 
-    $("#notes").empty();
+    // $("#notes").empty();
     let thisId = $(this).attr("data-id");
-
+    
     $.ajax({
         method: "GET",
         url: "/articles/" + thisId

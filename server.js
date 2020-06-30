@@ -46,6 +46,17 @@ app.get("/articles", function(req, res) {
     });
 });
 
+app.get("/articles/:id", function(req,res) {
+    db.Articles.findById(req.params.id)
+    .populate("Articles")
+    .then(function(dbArticles) {
+        res.json(dbArticles);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
 app.listen(PORT, () => {
     console.log("Connected to Port " + PORT);
 });
