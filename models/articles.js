@@ -10,6 +10,10 @@ const ArticlesSchema = new Schema({
         type: String,
         required: true
     },
+    class: {
+        type: String,
+        required: true
+    },
     note: {
         type: Schema.Types.ObjectId,
         ref: "notes"

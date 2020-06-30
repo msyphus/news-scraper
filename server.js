@@ -21,6 +21,7 @@ app.get("/scrape", function(req, res) {
             let result = {};
             result.title = $(element).find("a").attr("title");
             result.link = $(element).find("a").attr("href");
+            result.class = $(element).attr("class");
 
             db.Articles.create(result)
                 .then(function(dbArticle) {
