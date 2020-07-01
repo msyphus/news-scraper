@@ -57,6 +57,30 @@ app.get("/articles/:id", function(req,res) {
     });
 });
 
+app.post("/articles/:id", function(req, res) {
+    db.Notes.create(req.body)   
+        .then(function(dbNotes) {
+            return db.Articles.findOneAndUpdate({_id: req.params.id}, {notes: dbNotes._id}, {new: true});
+    })
+    .then(function(dbArticles) {
+        res.json(dbArticles);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
+app.get("/articles/:id", function(req, res) {
+    db.Articles.findOne({_id: req.params.id})
+        .populate("Notes")
+        .then(function(dbArticles) {
+            res.json(dbArticles);
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+});
+
 app.listen(PORT, () => {
     console.log("Connected to Port " + PORT);
 });

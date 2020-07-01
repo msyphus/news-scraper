@@ -37,7 +37,7 @@ $(document).on("click", "#savenote", function() {
             body: $("#bodyinput").val()
         }
     })
-        .then(function(data) {
+        .then(function() {
             $("#notes").empty();
         });
 
