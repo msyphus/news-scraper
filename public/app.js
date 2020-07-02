@@ -1,3 +1,15 @@
+$(document).on("click", "#dailyCatch", function() {
+    $.ajax({
+        method: "GET",
+        url: "/scrape"
+    })
+    .then(function() {
+        alert("Got a Bite!")
+        getArticles();
+    });
+});
+
+function getArticles() {
 $.getJSON("/articles", function(data) { 
     for (var i = 0; i < data.length; i++) {
         var arr = data[i].class.split(" ");
@@ -6,6 +18,7 @@ $.getJSON("/articles", function(data) {
         $("#articles").append("<p id='accordion" + [i] + "' class='collapse'>" + data[i].link + "<br />" + arr + "</p>");
     }
 });
+};
 
 $(document).on("click", "p", function() { 
     // $("#notes").empty();
