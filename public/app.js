@@ -14,8 +14,9 @@ $.getJSON("/articles", function(data) {
     for (var i = 0; i < data.length; i++) {
         var arr = data[i].class.split(" ");
         arr = arr.slice(7);
+        arr = arr.join("; ");
         $("#articles").append("<button type='button' class='btn btn-primary headlines' data-toggle='collapse' data-target='#accordion" + [i] + "' data-id='" + data[i]._id + "'>" + data[i].title + "</a>");
-        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + data[i].link + "<br />" + arr + "</p>");
+        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + "<a href='" + data[i].link + "' target='_blank'>" + data[i].link + "</a>" + "<br />" + arr + "</p>");
     }
 });
 };
