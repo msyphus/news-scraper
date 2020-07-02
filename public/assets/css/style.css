@@ -8,9 +8,24 @@ body {
     background-color: transparent;
     color: seashell;
     text-shadow: 0 0 8px black;
+    margin-bottom: 0;
+}
+
+.row {
+    padding-bottom: 20px;
 }
 
 p {
     color: seashell;
     text-shadow: 0 0 4px black;
+}
+
+.headlines {
+    display: block;
+    margin: auto;
+}
+
+.articleData {
+    text-align: center;
+    padding: 20px!important;
 }
