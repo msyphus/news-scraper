@@ -26,7 +26,20 @@
     </div>
 
     <div id="articles"></div>
-    <div id="notes"></div>
+    <div class="modal" id="notesModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Take Notes</h3>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <textarea id='bodyinput' name='body'></textarea>
+                    <button data-id='" + data._id + "' id='savenote'>Save Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     
 <script src="app.js"></script>

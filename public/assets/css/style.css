@@ -27,5 +27,10 @@ p {
 
 .articleData {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
+}
+
+.addNote {
+    text-align: center;
+    margin: 10px auto;
 }

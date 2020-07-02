@@ -15,13 +15,13 @@ $.getJSON("/articles", function(data) {
         var arr = data[i].class.split(" ");
         arr = arr.slice(7);
         arr = arr.join("; ");
-        $("#articles").append("<button type='button' class='btn btn-primary headlines' data-toggle='collapse' data-target='#accordion" + [i] + "' data-id='" + data[i]._id + "'>" + data[i].title + "</a>");
-        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + "<a href='" + data[i].link + "' target='_blank'>" + data[i].link + "</a>" + "<br />" + arr + "</p>");
+        $("#articles").append("<button type='button' class='btn btn-primary headlines' data-toggle='collapse' data-target='#accordion" + [i] + "' data-id='" + data[i]._id + "'>" + data[i].title + "</button>");
+        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + "<a href='" + data[i].link + "' target='_blank'>" + data[i].link + "</a>" + "<br />" + arr + "<br />" + "<button class='btn btn-primary addNote' data-toggle='modal' data-target='#notesModal'>Take Notes</button>" + "</p>");
     }
 });
 };
 
-$(document).on("click", "p", function() { 
+$(document).on("click", ".addNote", function() { 
     // $("#notes").empty();
     var thisId = $(this).attr("data-id");
     
