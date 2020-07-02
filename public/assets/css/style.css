@@ -1,0 +1,8 @@
+.bgImg {
+    background-image: url("https://cdn.pixabay.com/photo/2018/01/05/02/47/fish-3062034_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: black;
+    text-shadow: 0 0 4px seashell;
+}
