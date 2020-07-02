@@ -1,6 +1,6 @@
 $.getJSON("/articles", function(data) { 
-    for (let i = 0; i < data.length; i++) {
-        let arr = data[i].class.split(" ");
+    for (var i = 0; i < data.length; i++) {
+        var arr = data[i].class.split(" ");
         arr = arr.slice(7);
         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + arr + "</p>");
     }
@@ -8,7 +8,7 @@ $.getJSON("/articles", function(data) {
 
 $(document).on("click", "p", function() { 
     // $("#notes").empty();
-    let thisId = $(this).attr("data-id");
+    var thisId = $(this).attr("data-id");
     
     $.ajax({
         method: "GET",
@@ -16,6 +16,7 @@ $(document).on("click", "p", function() {
     })
     .then(function(data) {
         $("#notes").append("<h3>" + data.title + "</h3>");
+        $("#notes").append("<input id='titleinput' name='title' >");
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>")
         
@@ -27,7 +28,7 @@ $(document).on("click", "p", function() {
 });
 
 $(document).on("click", "#savenote", function() {
-    let thisId = $(this).attr("data-id");
+    var thisId = $(this).attr("data-id");
 
     $.ajax({
         method: "POST",
