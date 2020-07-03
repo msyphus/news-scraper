@@ -50,28 +50,33 @@ $(document).on("click", "#savenote", function() {
         articleTitle = response.title;
         articleLink = response.link;
         articleClass = response.class;
-    });
-
-    $.ajax({
-        method: "POST",
-        url: "/articles/" + articleId,
-        data: {
-            body: $("#bodyinput").val()
-        }
     })
-        .then(function() {
+    .then(function() {
+        $.ajax({
+            method: "POST",
+            url: "/articles/" + articleId,
+            data: {
+                body: $("#bodyinput").val()
+            }
+        })
+        .then(function () {
             $("#bodyinput").val("");
+        })
+    })
+    .then(function() {
+        $.ajax({
+            method: "POST",
+            url: "/saved-articles",
+            data: {
+                _id: articleId,
+                title: articleTitle,
+                link: articleLink,
+                class: articleClass,
+                note: $("#bodyinput").val()
+            }
+        })
+        .then(function (response) {
+            console.log(response);
         });
-
-    $.ajax({
-        method: "POST",
-        url: "/saved-articles",
-        data: {
-            _id: articleId,
-            title: articleTitle,
-            link: articleLink,
-            class: articleClass,
-            note: $("#bodyinput").val()
-        }
-    });
+    }); 
 });
