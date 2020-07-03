@@ -59,6 +59,18 @@ app.get("/articles/:id", function(req,res) {
     });
 });
 
+app.get("/saved-articles", function(req, res) {
+    db.Saved.find({})
+        .populate("Saved")
+        .then(function (dbSaved) {
+            res.json(dbSaved);
+            console.log("GetSaved", dbSaved);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+})
+
 app.post("/articles/:id", function(req, res) {
     db.Note.create(req.body)   
         .then(function(dbNote) {
@@ -76,16 +88,16 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-// app.get("/articles/:id", function(req, res) {
-//     db.Articles.findOne({_id: req.params.id})
-//         .populate("Notes")
-//         .then(function(dbArticles) {
-//             res.json(dbArticles);
-//         })
-//         .catch(function(err) {
-//             res.json(err);
-//         });
-// });
+app.post("/saved-articles", function(req, res) {
+    db.Saved.create(req.body)
+        .then(function(dbSaved) {
+            res.json(dbSaved);
+            console.log("Saved", dbSaved);
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+});
 
 app.listen(PORT, () => {
     console.log("Connected to Port " + PORT);

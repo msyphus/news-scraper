@@ -1,4 +1,7 @@
 var articleId;
+var articleTitle;
+var articleLink;
+var articleClass;
 
 $(document).on("click", "#dailyCatch", function() {
     $.ajax({
@@ -18,37 +21,37 @@ $.getJSON("/articles", function(data) {
         arr = arr.slice(7);
         arr = arr.join("; ");
         $("#articles").append("<button type='button' class='btn btn-primary headlines' data-toggle='collapse' data-target='#accordion" + [i] + "' data-id='" + data[i]._id + "'>" + data[i].title + "</button>");
-        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + "<a href='" + data[i].link + "' target='_blank'>" + data[i].link + "</a>" + "<br />" + arr + "<br />" + "<button class='btn btn-primary addNote' data-toggle='modal' data-target='#notesModal'>Take Notes</button>" + "</p>");
+        $("#articles").append("<p id='accordion" + [i] + "' class='collapse articleData'>" + "<a href='" + data[i].link + "' target='_blank'>" + data[i].link + "</a>" + "<br />" + arr + "<br />" + "<button class='btn btn-primary addNote' data-toggle='modal' data-target='#notesModal'>Save Article</button>" + "</p>");
     }
 });
 };
+
+$(document).on("click", "#savedNews", function() {
+    $.ajax({
+        method: "GET",
+        url: "/saved-articles"
+    })
+    .then(function() {
+        alert("Here they are!")
+    });
+});
 
 $(document).on("click", ".headlines", function() {
     var thisId = $(this).attr("data-id");
     articleId = thisId;
 })
-// $(document).on("click", ".addNote", function() { 
-//     // $("#notes").empty();
-//     var thisId = $(this).attr("data-id");
-    
-//     $.ajax({
-//         method: "GET",
-//         url: "/articles/" + thisId
-//     })
-//     .then(function(data) {
-//         $("#notes").append("<h3>" + data.title + "</h3>");
-//         $("#notes").append("<input id='titleinput' name='title' >");
-//         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-//         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>")
-        
-//         if(data.note) {
-//             $("#titleinput").val(data.note.title);
-//             $("#bodyinput").val(data.note.body);
-//         }
-//     });
-// });
 
 $(document).on("click", "#savenote", function() {
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + articleId
+    })
+    .then(function(response) {
+        articleTitle = response.title;
+        articleLink = response.link;
+        articleClass = response.class;
+    });
+
     $.ajax({
         method: "POST",
         url: "/articles/" + articleId,
@@ -59,4 +62,16 @@ $(document).on("click", "#savenote", function() {
         .then(function() {
             $("#bodyinput").val("");
         });
-})
+
+    $.ajax({
+        method: "POST",
+        url: "/saved-articles",
+        data: {
+            _id: articleId,
+            title: articleTitle,
+            link: articleLink,
+            class: articleClass,
+            note: $("#bodyinput").val()
+        }
+    });
+});
