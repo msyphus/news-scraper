@@ -11,6 +11,10 @@ $.ajax({
     }
 });
 
+$(document).on("click", "#homeBtn", function () {
+    window.location.href = "/index.html"
+});
+
 $(document).on("click", ".headlines", function () {
     articleId = $(this).attr("data-id");
 })
