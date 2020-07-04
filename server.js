@@ -70,6 +70,16 @@ app.get("/saved-articles", function(req, res) {
         });
 })
 
+app.get("/saved-articles/:id", function(req, res) {
+    db.Saved.findOne({ _id: req.params.id })
+    .then(function(dbSaved) {
+        res.json(dbSaved);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
 app.post("/articles/:id", function(req, res) {
     db.Note.create(req.body)   
         .then(function(dbNote) {
