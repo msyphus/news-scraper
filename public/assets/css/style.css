@@ -2,6 +2,7 @@ body {
     background-image: url("https://cdn.pixabay.com/photo/2018/01/05/02/47/fish-3062034_1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .bgImg {
@@ -26,8 +27,26 @@ p {
 }
 
 .articleData {
+    background-color: rgba(255, 245, 238, 0.65);
+    color: black;
+    text-shadow: none;
     text-align: center;
     padding: 10px;
+}
+
+.modal-title {
+    display: inline-block;
+}
+
+#bodyinput {
+    width: 80%;
+    display: block;
+    margin: auto;
+    border-radius: 2px;
+}
+
+.articleBtn {
+    margin: 8px 4px;
 }
 
 .addNote {
