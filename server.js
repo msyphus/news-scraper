@@ -2,13 +2,13 @@ var express = require("express");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
-var logger = require('morgan');
+// var logger = require('morgan');
 var PORT = 3000;
 
 var db = require("./models");
 var app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -64,7 +64,6 @@ app.get("/saved-articles", function(req, res) {
         .populate("Saved")
         .then(function (dbSaved) {
             res.json(dbSaved);
-            console.log("GetSaved", dbSaved);
         })
         .catch(function (err) {
             res.json(err);

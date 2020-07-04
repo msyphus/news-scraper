@@ -27,13 +27,7 @@ $.getJSON("/articles", function(data) {
 };
 
 $(document).on("click", "#savedNews", function() {
-    $.ajax({
-        method: "GET",
-        url: "/saved-articles"
-    })
-    .then(function() {
-        alert("Here they are!")
-    });
+    window.location.href = "/saved.html"
 });
 
 $(document).on("click", ".headlines", function() {
