@@ -12,6 +12,7 @@ $(document).on("click", "#dailyCatch", function() {
     })
     .then(function() {
         alert("Got a Bite!")
+        $("#articles").empty();
         getArticles();
     });
 });
