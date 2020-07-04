@@ -2,13 +2,11 @@ var express = require("express");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
-// var logger = require('morgan');
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 var db = require("./models");
 var app = express();
 
-// app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -108,7 +106,6 @@ app.post("/saved-articles", function(req, res) {
 });
 
 app.post("/saved-articles/:id", function(req, res) {
-    console.log(req.body);
     if(req.body.delete) {
         db.Saved.deleteOne({ _id: req.params.id })
         .then(function (dbSaved) {

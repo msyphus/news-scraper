@@ -3,6 +3,8 @@ var articleTitle;
 var articleLink;
 var articleClass;
 
+getArticles();
+
 $(document).on("click", "#dailyCatch", function() {
     $.ajax({
         method: "GET",
