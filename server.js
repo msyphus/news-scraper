@@ -91,12 +91,22 @@ app.post("/saved-articles", function(req, res) {
     db.Saved.create(req.body)
         .then(function(dbSaved) {
             res.json(dbSaved);
-            console.log("Saved", dbSaved);
         })
         .catch(function(err) {
             res.json(err);
         });
 });
+
+app.post("/saved-articles/:id", function(req, res) {
+    db.Saved.deleteOne({ _id: req.params.id})
+    .then(function (dbSaved) {
+        res.json(dbSaved);
+    })
+    .catch(function (err) {
+        res.json(err);
+    });
+})
+
 
 app.listen(PORT, () => {
     console.log("Connected to Port " + PORT);
