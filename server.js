@@ -108,15 +108,30 @@ app.post("/saved-articles", function(req, res) {
 });
 
 app.post("/saved-articles/:id", function(req, res) {
-    db.Saved.deleteOne({ _id: req.params.id})
-    .then(function (dbSaved) {
-        res.json(dbSaved);
-    })
-    .catch(function (err) {
-        res.json(err);
-    });
-})
-
+    console.log(req.body);
+    if(req.body.delete) {
+        db.Saved.deleteOne({ _id: req.params.id })
+        .then(function (dbSaved) {
+            res.json(dbSaved);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+    } else {
+        db.Saved.findOneAndUpdate(
+            { _id: req.params.id },
+            { note: req.body.note },
+            { new: false }
+        )
+        .then(function (dbArticle) {
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+    }
+});
+    
 
 app.listen(PORT, () => {
     console.log("Connected to Port " + PORT);

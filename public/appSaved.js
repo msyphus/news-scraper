@@ -21,15 +21,30 @@ $(document).on("click", "#editArticle", function() {
         url: "/saved-articles/" + articleId
     })
     .then(function(response) {
-        console.log(response);
         $("#bodyinput").val(response.note);
     })
+});
+
+$(document).on("click", "#savenote", function () {
+    $.ajax({
+        method: "POST",
+        url: "/saved-articles/" + articleId,
+        data: {
+            note: $("#bodyinput").val()
+        }
+    })
+    .then(function () {
+        alert("Note updated!");
+    });
 });
 
 $(document).on("click", "#deleteNote", function() {
     $.ajax({
         method: "POST",
-        url: "/saved-articles/" + articleId
+        url: "/saved-articles/" + articleId,
+        data: {
+            delete: true
+        }
     })
     .then(function(response) {
         alert("Article deleted");
