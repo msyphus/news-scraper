@@ -37,7 +37,6 @@ app.get("/scrape", function(req, res) {
 
 app.get("/articles", function(req, res) {
     db.Article.find({})
-    // .populate("Article")
     .then(function(dbArticle) {
         res.json(dbArticle);
     })
